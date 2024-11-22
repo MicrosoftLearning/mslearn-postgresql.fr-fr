@@ -6,15 +6,15 @@ lab:
 
 # Explorer l’extension Azure AI
 
-En tant que développeur principal pour Margie’s Travel, vous avez été chargé de créer une application basée sur l’IA pour fournir à vos clients des recommandations intelligentes sur les locations. Vous souhaitez en savoir plus sur l’`azure_ai`extension pour Azure Database pour PostgreSQL et sur la façon dont elle peut vous aider à intégrer la puissance de l’IA générative (GenAI) dans votre application. Dans cet exercice, vous installez l’extension `azure_ai` dans un serveur flexible Azure Database pour PostgreSQL et explorez ses fonctionnalités pour intégrer les services Azure AI et ML.
+En tant que développeur principal pour Margie’s Travel, vous avez été chargé de créer une application basée sur l’IA pour fournir à vos clients des recommandations intelligentes sur les locations. Vous souhaitez en savoir plus sur l’extension `azure_ai` pour Azure Database pour PostgreSQL et sur la façon dont elle peut vous aider à intégrer la puissance de l’IA générative (GenAI) dans votre application. Dans cet exercice, vous installez l’extension `azure_ai` dans un serveur flexible Azure Database pour PostgreSQL et explorez ses fonctionnalités pour intégrer les services Azure AI et ML.
 
 ## Avant de commencer
 
-Vous avez besoin d’un [abonnement Azure](https://azure.microsoft.com/free) avec des droits d’administration, et vous devez disposer d’un accès à Azure OpenAI dans cet abonnement. Si vous avez besoin d’un accès Azure OpenAI, faites une demande à partir de la page [Accès limité Azure OpenAI](https://learn.microsoft.com/legal/cognitive-services/openai/limited-access).
+Vous avez besoin d’un [abonnement Azure](https://azure.microsoft.com/free) avec des droits d’administration.
 
 ### Déployer des ressources dans votre abonnement Azure
 
-Cette étape vous guide tout au long de l’utilisation de commandes Azure CLI à partir d’Azure Cloud Shell pour créer un groupe de ressources et exécuter un script Bicep pour déployer les services Azure nécessaires pour effectuer cet exercice dans votre abonnement Azure.
+Cette étape vous guide tout au long de l’utilisation de commandes Azure CLI à partir d’Azure Cloud Shell pour créer un groupe de ressources et exécuter un script Bicep pour déployer les services Azure nécessaires pour effectuer cet exercice dans votre abonnement Azure.
 
 1. Ouvrez un navigateur web et accédez au [portail Azure](https://portal.azure.com/).
 
@@ -22,9 +22,9 @@ Cette étape vous guide tout au long de l’utilisation de commandes Azure CLI �
 
     ![Capture d’écran de la barre d’outils du portail Azure, avec l’icône Cloud Shell encadrée en rouge.](media/12-portal-toolbar-cloud-shell.png)
 
-    Si vous y êtes invité, sélectionnez les options requises pour ouvrir un interpréteur de commandes *Bash*. Si vous avez déjà utilisé une console *PowerShell*, remplacez-la par un interpréteur de commandes *Bash*.
+    Si vous y êtes invité, sélectionnez les options requises pour ouvrir un interpréteur de commandes *Bash*. Si vous avez utilisé une console *PowerShell* auparavant, remplacez-la par un interpréteur de commandes *Bash*.
 
-3. À l’invite Cloud Shell, entrez ce qui suit pour cloner le référentiel GitHub contenant des ressources d’exercice :
+3. À l’invite Cloud Shell, entrez ce qui suit pour cloner le référentiel GitHub contenant les ressources de l’exercice :
 
     ```bash
     git clone https://github.com/MicrosoftLearning/mslearn-postgresql.git
@@ -48,10 +48,10 @@ Cette étape vous guide tout au long de l’utilisation de commandes Azure CLI �
 
     ```bash
     a=()
-    for i in {a..z} {A..Z} {0..9}; 
+    for i in {a..z} {A..Z} {0..9};
         do
-        a[$RANDOM]=$i
-    done
+        a[$RANDOM]=$i
+        done
     ADMIN_PASSWORD=$(IFS=; echo "${a[*]::18}")
     echo "Your randomly generated PostgreSQL admin user's password is:"
     echo $ADMIN_PASSWORD
@@ -69,7 +69,7 @@ Cette étape vous guide tout au long de l’utilisation de commandes Azure CLI �
     az group create --name $RG_NAME --location $REGION
     ```
 
-7. Enfin, utilisez Azure CLI pour exécuter un script de déploiement Bicep pour approvisionner des ressources Azure dans votre groupe de ressources :
+7. Enfin, utilisez Azure CLI pour exécuter un script de déploiement Bicep afin d’approvisionner des ressources Azure dans votre groupe de ressources :
 
     ```azurecli
     az deployment group create --resource-group $RG_NAME --template-file "mslearn-postgresql/Allfiles/Labs/Shared/deploy.bicep" --parameters restore=false adminLogin=pgAdmin adminLoginPassword=$ADMIN_PASSWORD
@@ -77,9 +77,9 @@ Cette étape vous guide tout au long de l’utilisation de commandes Azure CLI �
 
     Le script de déploiement Bicep approvisionne les services Azure requis pour effectuer cet exercice dans votre groupe de ressources. Les ressources déployées incluent un serveur flexible Azure Database pour PostgreSQ, Azure OpenAI et un service Azure AI Language. Le script Bicep effectue également certaines étapes de configuration, telles que l’ajout des extensions `azure_ai` et `vector` à la _liste d’autorisation_ du serveur PostgreSQL (via le paramètre de serveur azure.extensions), la création d’une base de données nommée `rentals` sur le serveur et l’ajout d’un déploiement nommé `embedding` à l’aide du modèle `text-embedding-ada-002` à votre service Azure OpenAI. Notez que le fichier Bicep est partagé par tous les modules de ce parcours d’apprentissage. Vous pouvez donc utiliser uniquement certaines des ressources déployées dans certains exercices.
 
-    Le déploiement prend généralement plusieurs minutes. Vous pouvez le surveiller à partir de Cloud Shell ou accéder à la page **Déploiements** du groupe de ressources que vous avez créé ci-dessus et observer la progression du déploiement.
+    Le déploiement prend généralement plusieurs minutes. Vous pouvez le surveiller à partir de Cloud Shell ou accéder à la page **Déploiements** du groupe de ressources que vous avez créé ci-dessus et observer la progression du déploiement.
 
- 8. Fermez le volet Cloud Shell une fois votre déploiement de ressources terminé.
+ 8. Fermez le volet Cloud Shell une fois votre déploiement de ressources terminé.
  
 ### Résoudre les erreurs de déploiement
 
@@ -94,7 +94,7 @@ Vous pouvez rencontrer quelques erreurs lors de l’exécution du script de dép
     {"code": "FlagMustBeSetForRestore", "message": "An existing resource with ID '/subscriptions/{subscriptionId}/resourceGroups/rg-learn-postgresql-ai-eastus/providers/Microsoft.CognitiveServices/accounts/{accountName}' has been soft-deleted. To restore the resource, you must specify 'restore' to be 'true' in the property. If you don't want to restore existing resource, please purge it first."}
     ```
 
-    Si vous recevez ce message, modifiez la commande `azure deployment group create` ci-dessus pour définir le paramètre `restore` égal à `true` et réexécutez-la.
+    Si vous recevez ce message, modifiez la commande `azure deployment group create` ci-dessus pour que le paramètre `restore` soit défini sur `true` et réexécutez-la.
 
 - Si la région sélectionnée est limitée à l’approvisionnement de ressources spécifiques, vous devez définir la variable `REGION` à un autre emplacement et réexécuter les commandes pour créer le groupe de ressources et exécuter le script de déploiement Bicep.
 
@@ -102,7 +102,7 @@ Vous pouvez rencontrer quelques erreurs lors de l’exécution du script de dép
     {"status":"Failed","error":{"code":"DeploymentFailed","target":"/subscriptions/{subscriptionId}/resourceGroups/{resourceGrouName}/providers/Microsoft.Resources/deployments/{deploymentName}","message":"At least one resource deployment operation failed. Please list deployment operations for details. Please see https://aka.ms/arm-deployment-operations for usage details.","details":[{"code":"ResourceDeploymentFailure","target":"/subscriptions/{subscriptionId}/resourceGroups/{resourceGrouName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}","message":"The resource write operation failed to complete successfully, because it reached terminal provisioning state 'Failed'.","details":[{"code":"RegionIsOfferRestricted","message":"Subscriptions are restricted from provisioning in this region. Please choose a different region. For exceptions to this rule please open a support request with Issue type of 'Service and subscription limits'. See https://review.learn.microsoft.com/en-us/azure/postgresql/flexible-server/how-to-request-quota-increase for more details."}]}]}}
     ```
 
-- Si le script ne parvient pas à créer une ressource IA en raison de la nécessité d’accepter le contrat d’IA responsable, vous pouvez rencontrer l’erreur suivante. Dans ce cas, utilisez l’interface utilisateur du portail Azure pour créer une ressource Azure AI Services, puis réexécutez le script de déploiement.
+- Si le script ne parvient pas à créer une ressource IA en raison de la nécessité d’accepter le contrat d’IA responsable, vous pouvez rencontrer l’erreur suivante. Dans ce cas, utilisez l’interface utilisateur du portail Azure pour créer une ressource Azure AI Services, puis réexécutez le script de déploiement.
 
     ```bash
     {"code": "InvalidTemplateDeployment", "message": "The template deployment 'deploy' is not valid according to the validation procedure. The tracking id is 'f8412edb-6386-4192-a22f-43557a51ea5f'. See inner errors for details."}
@@ -121,13 +121,13 @@ Dans cette tâche, vous allez vous connecter à la base de données `rentals` su
 
     ![Capture d’écran de la page Bases de données d’Azure SQL Database pour PostgreSQL. Le paramètre Bases de données et l’élément Connecter de la base de données de location sont encadrés en rouge.](media/12-postgresql-rentals-database-connect.png)
 
-3. À l’invite « Mot de passe pour l’utilisateur pgAdmin » dans Cloud Shell, entrez le mot de passe généré de manière aléatoire pour la connexion **pgAdmin**.
+3. À l’invite « Mot de passe pour l’utilisateur pgAdmin » dans Cloud Shell, entrez le mot de passe généré de manière aléatoire pour la connexion **pgAdmin**.
 
     Une fois connecté, l’invite `psql` de la base de données `rentals` s’affiche.
 
-4. Tout au long de cet exercice, vous continuez à travailler dans Cloud Shell. Il peut donc être utile d’étendre le volet dans la fenêtre de votre navigateur en sélectionnant le bouton **Agrandir** en haut à droite du volet.
+4. Tout au long de cet exercice, vous continuerez à travailler dans Cloud Shell. Il peut donc être utile d’étendre le volet dans la fenêtre de votre navigateur en sélectionnant le bouton **Agrandir** en haut à droite du volet.
 
-    ![Capture d’écran du volet Azure Cloud Shell avec le bouton Agrandir encadré en rouge.](media/12-azure-cloud-shell-pane-maximize.png)
+    ![Capture d’écran du volet Azure Cloud Shell avec le bouton Agrandir encadré en rouge.](media/12-azure-cloud-shell-pane-maximize.png)
 
 ## Remplissez la base de données avec des exemples de données
 
@@ -160,7 +160,7 @@ Avant d’explorer l’extension `azure_ai`, ajoutez quelques tables à la base 
     );
     ```
 
-2. Ensuite, utilisez la commande `COPY` pour charger des données à partir de fichiers CSV dans chaque table que vous avez créée ci-dessus. Commencez par exécuter la commande suivante pour remplir la table `listings`.
+2. Ensuite, utilisez la commande `COPY` pour charger des données à partir de fichiers CSV dans chaque table que vous avez créée ci-dessus. Commencez par exécuter la commande suivante pour remplir la table `listings` :
 
     ```sql
     \COPY listings FROM 'mslearn-postgresql/Allfiles/Labs/Shared/listings.csv' CSV HEADER
@@ -258,16 +258,16 @@ Le schéma `azure_ai` fournit l’infrastructure permettant d’interagir direct
     | `azure_openai.subscription_key` | Une clé d’abonnement pour une ressource Azure OpenAI. |
     | `azure_cognitive.endpoint` | Un point de terminaison Azure AI Services pris en charge (par exemple, <https://example.cognitiveservices.azure.com>). |
     | `azure_cognitive.subscription_key` | Une clé d’abonnement pour une ressource Azure AI Services. |
-    | `azure_ml.scoring_endpoint` | Un point de terminaison de scoring Azure ML pris en charge (par exemple, <https://example.eastus2.inference.ml.azure.com/score>) |
+    | `azure_ml.scoring_endpoint` | Un point de terminaison de scoring Azure ML pris en charge (par exemple, <https://example.eastus2.inference.ml.azure.com/score>). |
     | `azure_ml.endpoint_key` | Une clé de point de terminaison pour un déploiement Azure ML. |
 
     > Important
     >
     > Étant donné que les informations de connexion pour Azure AI services, y compris les clés API, sont stockées dans une table de configuration dans la base de données, l’extension `azure_ai` définit un rôle appelé `azure_ai_settings_manager` pour garantir que ces informations sont protégées et accessibles uniquement aux utilisateurs affectés à ce rôle. Ce rôle permet la lecture et l’écriture des paramètres liés à l’extension. Seuls les membres du rôle `azure_ai_settings_manager` peuvent appeler les fonctions `azure_ai.get_setting()` et `azure_ai.set_setting()`. Dans le serveur flexible Azure Database pour PostgreSQL, tous les utilisateurs administrateurs (dotés du rôle `azure_pg_admin`) se voient également affecter le rôle `azure_ai_settings_manager`.
 
-2. Pour mettre en pratique l’utilisation des fonctions `azure_ai.set_setting()` et `azure_ai.get_setting()`, configurez la connexion à votre compte Azure OpenAI. À l’aide de l’onglet du navigateur dans lequel votre Cloud Shell est ouvert, réduisez ou restaurez le volet Cloud Shell, puis accédez à votre ressource Azure OpenAI dans le [portail Azure](https://portal.azure.com/). Une fois que vous êtes sur la page de ressources Azure OpenAI, dans le menu des ressources, dans la section **Gestion des ressources**, sélectionnez **Clés et point de terminaison**, puis copiez votre point de terminaison et l’une des clés disponibles.
+2. Pour mettre en pratique l’utilisation des fonctions `azure_ai.set_setting()` et `azure_ai.get_setting()`, configurez la connexion à votre compte Azure OpenAI. À l’aide de l’onglet du navigateur dans lequel votre Cloud Shell est ouvert, réduisez ou restaurez le volet Cloud Shell, puis accédez à votre ressource Azure OpenAI dans le [portail Azure](https://portal.azure.com/). Une fois que vous êtes sur la page de ressources Azure OpenAI, dans le menu des ressources, dans la section **Gestion des ressources**, sélectionnez **Clés et point de terminaison**, puis copiez votre point de terminaison et l’une des clés disponibles.
 
-    ![Capture d’écran de la page Clés et points de terminaison du service Azure OpenAI. Les boutons de copie de la clé 1 et du point de terminaison sont encadrés en rouge.](media/12-azure-openai-keys-and-endpoints.png)
+    ![Capture d’écran de la page Clés et points de terminaison du service Azure OpenAI. Les boutons de copie de la clé 1 et du point de terminaison sont encadrés en rouge.](media/12-azure-openai-keys-and-endpoints.png)
 
     Vous pouvez utiliser soit `KEY 1`, soit `KEY 2`. Avoir toujours deux clés vous permet de faire pivoter et de régénérer en toute sécurité les clés sans provoquer d’interruption de service.
 
@@ -316,9 +316,9 @@ Le schéma `azure_openai` permet d’intégrer l’incorporation vectorielle de 
 
     ```sql
     SELECT
-      id,
-      name,
-      azure_openai.create_embeddings('embedding', description) AS vector
+        id,
+        name,
+        azure_openai.create_embeddings('embedding', description) AS vector
     FROM listings
     LIMIT 1;
     ```
@@ -355,7 +355,7 @@ Le schéma `azure_cognitive` fournit l’infrastructure pour interagir directeme
 
     Dans la sortie, observez que la fonction a trois surcharges, l’une acceptant une seule chaîne d’entrée et les deux autres attendant des tableaux de texte. La sortie affiche le schéma, le nom, le type de données de résultat et les types de données d’argument de la fonction. Ces informations peuvent vous aider à comprendre comment utiliser la fonction.
 
-3. Exécutez à nouveau la commande ci-dessus, en remplaçant le nom `analyze_sentiment` de la fonction par chacun des noms de fonction suivants, pour inspecter toutes les fonctions disponibles dans le schéma :
+3. Exécutez à nouveau la commande ci-dessus, en remplaçant le nom de la fonction, `analyze_sentiment`, par chacun des noms de fonction suivants, pour inspecter toutes les fonctions disponibles dans le schéma :
 
    - `detect_language`
    - `extract_key_phrases`
@@ -394,11 +394,11 @@ Le schéma `azure_cognitive` fournit l’infrastructure pour interagir directeme
 
     Le `azure_cognitive.sentiment_analysis_result` est un type composite qui contient les prédictions de sentiment du texte d’entrée. Il comprend le sentiment, qui peut être positif, négatif, neutre ou mixte, et les scores pour les aspects positifs, neutres et négatifs trouvés dans le texte. Les scores sont représentés sous forme de nombres réels compris entre 0 et 1. Par exemple, dans (neutre, 0,26, 0,64, 0,09), le sentiment est neutre, avec un score positif de 0,26, neutre de 0,64 et négatif à 0,09.
 
-6. Comme avec les fonctions `azure_openai`, pour effectuer des appels auprès d’Azure AI Services à l’aide de l’extension `azure_ai`, vous devez fournir le point de terminaison et une clé pour votre service Azure AI Language. À l’aide de l’onglet du navigateur dans lequel Cloud Shell est ouvert, réduisez ou restaurez le volet Cloud Shell, puis accédez à votre ressource de service de langage dans le [portail Azure](https://portal.azure.com/). Dans le menu de la ressource, sous **Gestion des ressources**, sélectionnez **Clés et points de terminaison**.
+6. Comme avec les fonctions `azure_openai`, pour effectuer des appels auprès d’Azure AI Services à l’aide de l’extension `azure_ai`, vous devez fournir le point de terminaison et une clé pour votre service Azure AI Language. À l’aide de l’onglet du navigateur dans lequel Cloud Shell est ouvert, réduisez ou restaurez le volet Cloud Shell, puis accédez à votre ressource de service de langage dans le [portail Azure](https://portal.azure.com/). Dans le menu de la ressource, sous **Gestion des ressources**, sélectionnez **Clés et points de terminaison**.
 
-    ![Capture d’écran de la page Clés et points de terminaison du service de langage Azure. Les boutons de copie de la clé 1 et du point de terminaison sont encadrés en rouge.](media/12-azure-language-service-keys-and-endpoints.png)
+    ![Capture d’écran de la page Clés et points de terminaison du service de langage Azure. Les boutons de copie de la clé 1 et du point de terminaison sont encadrés en rouge.](media/12-azure-language-service-keys-and-endpoints.png)
 
-7. Copiez les valeurs de point de terminaison et de clé d’accès, puis remplacez les jetons `{endpoint}` et `{api-key}` par les valeurs que vous avez copiées à partir du portail Azure. Agrandissez à nouveau Cloud Shell et exécutez les commandes à partir de l’invite de commandes `psql` dans Cloud Shell pour ajouter vos valeurs à la table de configuration.
+7. Copiez les valeurs de point de terminaison et de clé d’accès, puis remplacez les jetons `{endpoint}` et `{api-key}` par les valeurs que vous avez copiées à partir du portail Azure. Agrandissez à nouveau Cloud Shell et exécutez les commandes à partir de l’invite de commandes `psql` dans Cloud Shell pour ajouter vos valeurs à la table de configuration.
 
     ```sql
     SELECT azure_ai.set_setting('azure_cognitive.endpoint', '{endpoint}');
@@ -412,14 +412,14 @@ Le schéma `azure_cognitive` fournit l’infrastructure pour interagir directeme
 
     ```sql
     SELECT
-      id,
-      comments,
-      azure_cognitive.analyze_sentiment(comments, 'en') AS sentiment
+        id,
+        comments,
+        azure_cognitive.analyze_sentiment(comments, 'en') AS sentiment
     FROM reviews
     WHERE id IN (1, 3);
     ```
 
-    Observez les valeurs `sentiment` dans la sortie, `(mixed,0.71,0.09,0.2)` et `(positive,0.99,0.01,0)` . Celles-ci représentent le `sentiment_analysis_result` retourné par la fonction `analyze_sentiment()` dans la requête ci-dessus. L’analyse a été effectuée sur le champ`comments` de la table `reviews`.
+    Observez les valeurs `sentiment` dans la sortie, `(mixed,0.71,0.09,0.2)` et `(positive,0.99,0.01,0)`. Celles-ci représentent le `sentiment_analysis_result` retourné par la fonction `analyze_sentiment()` dans la requête ci-dessus. L’analyse a été effectuée sur le champ `comments` de la table `reviews`.
 
 ## Inspecter le schéma Azure ML
 
