@@ -24,7 +24,7 @@ Cette étape vous guidera tout au long de l’utilisation des commandes Azure CL
 
     ![Capture d’écran de la barre d’outils du portail Azure, avec l’icône Cloud Shell encadrée en rouge.](media/11-portal-toolbar-cloud-shell.png)
 
-    Si vous y êtes invité, sélectionnez les options requises pour ouvrir un interpréteur de commandes *Bash*. Si vous avez déjà utilisé une console *PowerShell*, remplacez-la par un interpréteur de commandes *Bash*.
+    Si vous y êtes invité, sélectionnez les options requises pour ouvrir un interpréteur de commandes *Bash*. Si vous avez utilisé une console *PowerShell* auparavant, remplacez-la par un interpréteur de commandes *Bash*.
 
 3. À l’invite Cloud Shell, entrez ce qui suit pour cloner le référentiel GitHub contenant des ressources d’exercice :
 
@@ -59,9 +59,9 @@ Cette étape vous guidera tout au long de l’utilisation des commandes Azure CL
     ```bash
     a=()
     for i in {a..z} {A..Z} {0..9}; 
-       do
-       a[$RANDOM]=$i
-    done
+        do
+        a[$RANDOM]=$i
+        done
     ADMIN_PASSWORD=$(IFS=; echo "${a[*]::18}")
     echo "Your randomly generated PostgreSQL admin user's password is:"
     echo $ADMIN_PASSWORD
@@ -79,7 +79,7 @@ Cette étape vous guidera tout au long de l’utilisation des commandes Azure CL
     az group create --name $RG_NAME --location $REGION
     ```
 
-7. Enfin, utilisez Azure CLI pour exécuter un script de déploiement Bicep pour approvisionner des ressources Azure dans votre groupe de ressources :
+7. Enfin, utilisez Azure CLI pour exécuter un script de déploiement Bicep afin d’approvisionner des ressources Azure dans votre groupe de ressources :
 
     ```azurecli
     az deployment group create --resource-group $RG_NAME --template-file "mslearn-postgresql/Allfiles/Labs/Shared/deploy-azure-machine-learning.bicep" --parameters adminLogin=pgAdmin adminLoginPassword=$ADMIN_PASSWORD
@@ -87,9 +87,9 @@ Cette étape vous guidera tout au long de l’utilisation des commandes Azure CL
 
     Le script de déploiement Bicep approvisionne les services Azure requis pour effectuer cet exercice dans votre groupe de ressources. Les ressources déployées incluent un serveur flexible Azure Database pour PostgreSQL et un espace de travail Azure Machine Learning. Le script de déploiement crée également tous les services requis pour instancier un espace de travail Azure Machine Learning, notamment un compte de stockage Blob Azure, un coffre Azure Key Vault, un référentiel de conteneurs Azure, un espace de travail Azure Log Analytics et une instance d’Azure Application Insights. Le script Bicep effectue également certaines étapes de configuration, telles que l’ajout des extensions `azure_ai` et `vector` à la _liste d’autorisation_ du serveur PostgreSQL (via le paramètre de serveur azure.extensions), et la création d’une base de données nommée `rentals` sur le serveur. **Notez que le fichier Bicep diffère des autres modules de ce parcours d’apprentissage.**
 
-    Le déploiement prend généralement plusieurs minutes. Vous pouvez le surveiller à partir de Cloud Shell ou accéder à la page **Déploiements** du groupe de ressources que vous avez créé ci-dessus et observer la progression du déploiement.
+    Le déploiement prend généralement plusieurs minutes. Vous pouvez le surveiller à partir de Cloud Shell ou accéder à la page **Déploiements** du groupe de ressources que vous avez créé ci-dessus et observer la progression du déploiement.
 
-8. Fermez le volet Cloud Shell une fois votre déploiement de ressources terminé.
+8. Fermez le volet Cloud Shell une fois votre déploiement de ressources terminé.
 
 ### Résoudre les erreurs de déploiement
 
@@ -104,7 +104,7 @@ Vous pouvez rencontrer quelques erreurs lors de l’exécution du script de dép
     {"code": "FlagMustBeSetForRestore", "message": "An existing resource with ID '/subscriptions/{subscriptionId}/resourceGroups/rg-learn-postgresql-ai-eastus/providers/Microsoft.CognitiveServices/accounts/{accountName}' has been soft-deleted. To restore the resource, you must specify 'restore' to be 'true' in the property. If you don't want to restore existing resource, please purge it first."}
     ```
 
-    Si vous recevez ce message, modifiez la commande `azure deployment group create` ci-dessus pour définir le paramètre `restore` égal à `true` et réexécutez-la.
+    Si vous recevez ce message, modifiez la commande `azure deployment group create` ci-dessus pour que le paramètre `restore` soit défini sur `true` et réexécutez-la.
 
 - Si la région sélectionnée est limitée à l’approvisionnement de ressources spécifiques, vous devez définir la variable `REGION` à un autre emplacement et réexécuter les commandes pour créer le groupe de ressources et exécuter le script de déploiement Bicep.
 
@@ -133,41 +133,37 @@ La première étape consiste à déployer un modèle sur Azure Machine Learning.
 
     ![Capture d’écran d’Azure Machine Learning avec le bouton Lancer Studio encadré en rouge.](media/19-aml-launch-studio.png)
 
-4. Sélectionnez l’option de menu **Espaces de travail** et choisissez votre espace de travail Azure Machine Learning nouvellement créé.
-
-    ![Capture d’écran d’Azure Machine Learning Studio avec l’option de menu Espaces de travail et l’espace de travail Azure Machine Learning encadrés en rouge.](media/19-aml-workspace.png)
-
-5. Sélectionnez l’option de menu **Modèles** dans le menu **Ressources**. Sélectionnez l’option de menu **+ Enregistrer**, puis choisissez **À partir de fichiers locaux**.
+4. Sélectionnez l’option de menu **Modèles** dans le menu **Ressources**. Sélectionnez l’option de menu **+ Enregistrer**, puis choisissez **À partir de fichiers locaux**.
 
     ![Capture d’écran de la page Liste de modèle. L’option de menu Modèles, le bouton déroulant Enregistrer et l’option À partir de fichiers locaux sont encadrés en rouge.](media/19-aml-register-from-local-files.png)
 
-6. Dans le menu **Charger un modèle**, définissez le type de modèle sur **MLflow**. Choisissez ensuite **Parcourir** et accédez à votre dossier **mlflow-model**, en chargeant les ressources. Puis,sélectionnez le bouton **Suivant** pour continuer.
+5. Dans le menu **Charger un modèle**, définissez le type de modèle sur **MLflow**. Choisissez ensuite **Parcourir** et accédez à votre dossier **mlflow-model**, en chargeant les ressources. Puis,sélectionnez le bouton **Suivant** pour continuer.
 
     ![Capture d’écran de la page du menu Charger un modèle. Le type de modèle MLflow, les boutons Parcourir et Suivant sont encadrés en rouge.](media/19-aml-register-upload-model.png)
 
-7. Nommez le modèle **RentalListings**, puis sélectionnez le bouton **Suivant**.
+6. Nommez le modèle **RentalListings**, puis sélectionnez le bouton **Suivant**.
 
     ![Capture d’écran de l’écran Paramètres du modèle avec la valeur RentalListings entrée dans le champ Nom. La zone de texte Nom et le bouton Suivant sont encadrés en rouge.](media/19-aml-register-model-settings.png)
 
-8. Sélectionnez le bouton **Enregistrer** pour terminer l’enregistrement du modèle. Cette action vous redirige à la page **Modèles**. Sélectionnez le modèle que vous venez de créer.
+7. Sélectionnez le bouton **Enregistrer** pour terminer l’enregistrement du modèle. Cette action vous redirige à la page **Modèles**. Sélectionnez le modèle que vous venez de créer.
 
-    > [!Note]
-    >
-    > Si vous ne voyez pas de modèle, sélectionnez le bouton de l’option de menu **Actualiser** pour recharger la page. Vous devriez ensuite voir le modèle **RentalListings**
+> [!Note]
+>
+> Si vous ne voyez pas de modèle, sélectionnez le bouton de l’option de menu **Actualiser** pour recharger la page. Vous devriez ensuite voir le modèle **RentalListings**
 
-9. Sélectionnez l’option **Déployer** et créez un **point de terminaison en temps réel**.
+8. Sélectionnez l’option **Déployer** et créez un **point de terminaison en temps réel**.
 
     ![Capture d’écran de l’option de menu Point de terminaison en temps réel encadrée en rouge.](media/19-aml-automl-deploy-rte.png)
 
-10. Dans le menu volant de déploiement, définissez la **machine virtuelle** sur **Standard_DS2_v2** ou quelque chose de similaire, et le **nombre d’instances** sur 1. Sélectionnez le bouton **Déployer**. Le déploiement peut prendre plusieurs minutes, car le processus de déploiement inclut l’approvisionnement d’une machine virtuelle et le déploiement du modèle en tant que conteneur Docker.
+9. Dans le menu volant de déploiement, définissez la **machine virtuelle** sur **Standard_DS2_v2** ou quelque chose de similaire, et le **nombre d’instances** sur 1. Sélectionnez le bouton **Déployer**. Le déploiement peut prendre plusieurs minutes, car le processus de déploiement inclut l’approvisionnement d’une machine virtuelle et le déploiement du modèle en tant que conteneur Docker.
 
     ![Capture d’écran du menu volant de déploiement. La machine virtuelle est Standard_DS2_v2 et le nombre d’instances est égal à 1. La liste déroulante des machines virtuelles, la zone de texte Nombre d’instances et le bouton Déployer sont encadrés en rouge.](media/19-aml-automl-deploy-endpoint.png)
 
-11. Une fois le point de terminaison déployé, accédez à l’onglet **Consommer** et copiez le point de terminaison REST et la clé primaire pour pouvoir les utiliser dans la section suivante.
+10. Une fois le point de terminaison déployé, accédez à l’onglet **Consommer** et copiez le point de terminaison REST et la clé primaire pour pouvoir les utiliser dans la section suivante.
 
     ![Capture d’écran de l’onglet de consommation du point de terminaison. Les boutons de copie du point de terminaison REST et de la clé d’authentification primaire sont encadrés en rouge.](media/19-aml-automl-endpoint-consume.png)
 
-12. Pour tester le bon fonctionnement de votre point de terminaison, vous pouvez utiliser l’onglet **Test** de votre point de terminaison. Ensuite, collez le bloc suivant, en remplaçant toute entrée qui existe actuellement. Sélectionnez le bouton **Tester** et vous devez voir une sortie JSON contenant un tableau avec une valeur décimale unique indiquant le montant en dollars des États-Unis qu’une nuitée pour cette location particulière pourrait vous rapporter.
+11. Pour tester le bon fonctionnement de votre point de terminaison, vous pouvez utiliser l’onglet **Test** de votre point de terminaison. Ensuite, collez le bloc suivant, en remplaçant toute entrée qui existe actuellement. Sélectionnez le bouton **Tester** et vous devez voir une sortie JSON contenant un tableau avec une valeur décimale unique indiquant le montant en dollars des États-Unis qu’une nuitée pour cette location particulière pourrait vous rapporter.
 
     ```json
     {
@@ -203,11 +199,11 @@ Dans cette tâche, vous allez vous connecter à la base de données `rentals` su
 
     ![Capture d’écran de la page Bases de données d’Azure SQL Database pour PostgreSQL. Le paramètre Bases de données et l’élément Connecter de la base de données de location sont encadrés en rouge.](media/17-postgresql-rentals-database-connect.png)
 
-3. À l’invite « Mot de passe pour l’utilisateur pgAdmin » dans Cloud Shell, entrez le mot de passe généré de manière aléatoire pour la connexion **pgAdmin**.
+3. À l’invite « Mot de passe pour l’utilisateur pgAdmin » dans Cloud Shell, entrez le mot de passe généré de manière aléatoire pour la connexion **pgAdmin**.
 
     Une fois connecté, l’invite `psql` de la base de données `rentals` s’affiche.
 
-4. Tout au long de cet exercice, vous continuez à travailler dans Cloud Shell. Il peut donc être utile d’étendre le volet dans la fenêtre de votre navigateur en sélectionnant le bouton **Agrandir** en haut à droite du volet.
+4. Tout au long de cet exercice, vous continuerez à travailler dans Cloud Shell. Il peut donc être utile d’étendre le volet dans la fenêtre de votre navigateur en sélectionnant le bouton **Agrandir** en haut à droite du volet.
 
     ![Capture d’écran du volet Azure Cloud Shell avec le bouton Agrandir encadré en rouge.](media/17-azure-cloud-shell-pane-maximize.png)
 
@@ -327,9 +323,9 @@ Pour remplir la table de traduction linguistique, vous allez créer une procédu
     $$ LANGUAGE sql;
     ```
 
-    > [!Note]
-    >
-    > Par défaut, le nom du déploiement est une combinaison du nom du modèle (**locationlistings**) et du numéro de version (**1**). Si vous déployez une nouvelle version du modèle et utilisez le nom de déploiement par défaut, le nouveau nom de déploiement est **locationlistings-2**.
+> [!Note]
+>
+> Par défaut, le nom du déploiement est une combinaison du nom du modèle (**locationlistings**) et du numéro de version (**1**). Si vous déployez une nouvelle version du modèle et utilisez le nom de déploiement par défaut, le nouveau nom de déploiement est **locationlistings-2**.
 
 2. Exécutez la fonction à l’aide de la commande SQL suivante :
 
