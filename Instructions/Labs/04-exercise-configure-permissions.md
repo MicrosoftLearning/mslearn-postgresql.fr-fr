@@ -14,7 +14,7 @@ Pour effectuer cet exercice, vous avez besoin de votre propre abonnement Azure. 
 
 Pour effectuer ces exercices, vous devez installer un serveur PostgreSQL connecté à Microsoft Entra ID (anciennement Azure Active Directory).
 
-### Création d’un groupe de ressources
+### Créer un groupe de ressources
 
 1. Dans un navigateur web, accédez au [portail Azure](https://portal.azure.com). Connectez-vous à l’aide d’un compte propriétaire ou contributeur.
 2. Sous Services Azure, sélectionnez **Groupes de ressources**, puis **+ Créer**.
@@ -81,7 +81,7 @@ Pour installer Azure Data Studio afin de l’utiliser avec Azure Database pour P
 
 ### Créer la base de données zoo
 
-1. Accédez au dossier avec vos fichiers de script d’exercice ou téléchargez **Lab2_ZooDb.sql** à partir de [MSLearn PostgreSQL Labs](https://github.com/MicrosoftLearning/mslearn-postgresql/Allfiles/Labs/02).
+1. Accédez au dossier avec vos fichiers de script d’exercice ou téléchargez **Lab2_ZooDb.sql** à partir de [MSLearn PostgreSQL Labs](https://github.com/MicrosoftLearning/mslearn-postgresql/blob/main/Allfiles/Labs/02).
 1. Ouvrez Azure Data Studio s’il n’est pas déjà ouvert.
 1. Sélectionnez **Fichier**, **Ouvrir le fichier**, puis accédez au dossier dans lequel vous avez enregistré le script. Sélectionnez **../Allfiles/Labs/02/Lab2_ZooDb.sql** et **Ouvri**. Si un avertissement d’approbation s’affiche, sélectionnez **Ouvrir**.
 1. Exécutez le script. La base de données zoodb est créée.
