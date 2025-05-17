@@ -211,12 +211,12 @@ Dans cette section, vous vous connectez au serveur PostgreSQL à l’aide de l�
 
     1. Dans la boîte de dialogue **NOUVELLE CONNEXION**, entrez les informations suivantes :
 
-        - **Nom du serveur** : <your-server-name>.postgres.database.azure.com
+        - **Nom de serveur** : `<your-server-name>`.postgres.database.azure.com
         - **Type d’authentification** : Mot de passe
         - **Nom d’utilisateur ou d’utilisatrice** : pgAdmin
         - **Mot de passe** : mot de passe aléatoire que vous avez généré précédemment.
         - Cochez la case **Enregistrer le mot de passe**.
-        - **Nom de la connexion** : <your-server-name>
+        - **Nom de la connexion** : `<your-server-name>`
 
     1. Sélectionnez **Tester la connexion** pour tester la connexion. Si la connexion réussit, sélectionnez **Enregistrer et se connecter** pour enregistrer la connexion, sinon passez en revue les informations de connexion, puis réessayez.
 
@@ -228,8 +228,6 @@ Dans cette section, vous vous connectez au serveur PostgreSQL à l’aide de l�
 
 1. En bas à droite de Visual Studio Code, vérifiez que la connexion est verte. Si ce n’est pas le cas, un message **PGSQL déconnecté** doit être affiché. Sélectionnez le texte **PGSQL déconnecté**, puis sélectionnez votre connexion de serveur PostgreSQL dans la liste dans la palette de commandes. Si un mot de passe est demandé, entrez le mot de passe que vous avez généré précédemment.
 
-    > &#128221; Vous pouvez également modifier la base de données dans le volet de requête. Vous pouvez noter le nom du serveur et le nom de la base de données sous l’onglet requête lui-même. Sélectionner le nom de la base de données affiche une liste des bases de données. Sélectionnez la base de données `zoodb` dans la liste.
-
 1. C’est le moment de créer la base de données.
 
     1. Mettez en surbrillance les instructions **DROP** et **CREATE**, puis exécutez-les.
@@ -237,6 +235,8 @@ Dans cette section, vous vous connectez au serveur PostgreSQL à l’aide de l�
     1. Si vous mettez en surbrillance uniquement l’instruction **SELECT current_database()** et que vous l’exécutez, vous remarquez que la base de données est actuellement définie sur `postgres`. Vous devez remplacer cette valeur par `zoodb`.
 
     1. Sélectionnez les points de suspension dans la barre de menus avec l’icône d’*exécution* et sélectionnez **Modifier la base de données PostgreSQL**. Sélectionnez `zoodb` dans la liste des bases de données.
+
+    > &#128221; Vous pouvez également modifier la base de données dans le volet de requête. Vous pouvez noter le nom du serveur et le nom de la base de données sous l’onglet requête lui-même. Sélectionner le nom de la base de données affiche une liste des bases de données. Sélectionnez la base de données `zoodb` dans la liste.
 
     1. Réexécutez l’instruction **SELECT current_database()** pour confirmer que la base de données est maintenant définie sur `zoodb`.
 
@@ -298,7 +298,7 @@ C’est le moment de créer une fonction table. Une fonction table est une fonct
 
 Dans cette section, vous allez explorer certaines des fonctions intégrées disponibles dans PostgreSQL. PostgreSQL dispose d’un ensemble complet de fonctions intégrées que vous pouvez utiliser pour effectuer différentes opérations sur les données. Ces fonctions peuvent être utilisées dans les requêtes SQL pour manipuler et analyser des données.
 
-1. Dans Visual Studio Code, sélectionnez **Fichier**, **Ouvrir un fichier**, puis accédez aux scripts de labo. Sélectionnez **../Allfiles/Labs/05/Lab5_Table_Function.sql**, puis **Ouvrir**. Si nécessaire, reconnectez-vous au serveur en sélectionnant le texte **PGSQLdéconnecté** puis en sélectionnant votre connexion de serveur PostgreSQL dans la liste dans la palette de commandes. Si un mot de passe est demandé, entrez le mot de passe que vous avez généré précédemment.
+1. Dans Visual Studio Code, sélectionnez **Fichier**, **Ouvrir un fichier**, puis accédez aux scripts de labo. Sélectionnez **../Allfiles/Labs/05/Lab5_SimpleFunctions.sql**, puis **Ouvrir**. Si nécessaire, reconnectez-vous au serveur en sélectionnant le texte **PGSQLdéconnecté** puis en sélectionnant votre connexion de serveur PostgreSQL dans la liste dans la palette de commandes. Si un mot de passe est demandé, entrez le mot de passe que vous avez généré précédemment.
 
 > &#128221; Les fonctions de ce script ne sont pas spécifiques à la base de données zoo. Il s’agit de fonctions PostgreSQL générales qui peuvent être utilisées dans n’importe quelle base de données. Vous pouvez les exécuter dans n’importe quelle base de données, y compris la base de données `postgres`.
 
