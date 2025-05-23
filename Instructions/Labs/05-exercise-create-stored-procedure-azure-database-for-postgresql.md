@@ -236,7 +236,7 @@ Dans cette section, vous vous connectez au serveur PostgreSQL à l’aide de l�
 
     1. Sélectionnez les points de suspension dans la barre de menus avec l’icône d’*exécution* et sélectionnez **Modifier la base de données PostgreSQL**. Sélectionnez `zoodb` dans la liste des bases de données.
 
-        > &#128221; Vous pouvez également modifier la base de données dans le volet de requête. Vous pouvez noter le nom du serveur et le nom de la base de données sous l’onglet requête lui-même. Sélectionner le nom de la base de données affiche une liste des bases de données. Sélectionnez la base de données `zoodb` dans la liste.
+    > &#128221; Vous pouvez également modifier la base de données dans le volet de requête. Vous pouvez noter le nom du serveur et le nom de la base de données sous l’onglet requête lui-même. Sélectionner le nom de la base de données affiche une liste des bases de données. Sélectionnez la base de données `zoodb` dans la liste.
 
     1. Réexécutez l’instruction **SELECT current_database()** pour confirmer que la base de données est maintenant définie sur `zoodb`.
 
@@ -288,11 +288,11 @@ C’est le moment de créer une fonction table. Une fonction table est une fonct
 
 1. Mettez en surbrillance et exécutez la procédure stockée **CALL repopulate_zoo()** pour commencer avec des données propres.
 
-1. Mettez en surbrillance et exécutez le script situé après le commentaire **Créer une fonction table**. Cette fonction retourne une table appelée **enclosure_summary**. Lisez le code de fonction pour comprendre comment la table est remplie.
+1. Mettez en surbrillance et exécutez la section suivant le commentaire **Créer une fonction table**. Cette fonction retourne une table appelée **enclosure_summary**. Lisez le code de fonction pour comprendre comment la table est remplie.
 
 1. Mettez en surbrillance et exécutez les deux instructions SELECT, en passant un ID d’enclos différent chaque fois.
 
-1. Mettez en surbrillance et exécutez le script situé après le commentaire **Comment utiliser une fonction table avec une jointure LATERAL**. Ce script montre la fonction table utilisée à la place d’un nom de table dans une jointure.
+1. Mettez en surbrillance et exécutez la section suivant le commentaire **How to use a table valued function with a LATERAL join** (Comment utiliser une fonction table avec une jointure LATERAL). Ce script montre la fonction table utilisée à la place d’un nom de table dans une jointure.
 
 ## Fonctions intégrées
 
@@ -304,10 +304,6 @@ Dans cette section, vous allez explorer certaines des fonctions intégrées disp
 
 1. Mettez en surbrillance et exécutez chaque fonction pour voir comment elle fonctionne. Pour plus d’informations, consultez l’article de [documentation en ligne](https://www.postgresql.org/docs/current/functions.html) pour plus d’informations sur chaque fonction.
 
-## Nettoyage
-
-1. Si vous n’avez plus besoin de ce serveur PostgreSQL pour d’autres exercices, pour éviter d’entraîner des coûts Azure inutiles, supprimez le groupe de ressources créé dans cet exercice.
-
 1. Si vous souhaitez conserver le serveur PostgreSQL en cours d’exécution, vous pouvez le laisser en cours d’exécution. Sinon, vous pouvez arrêter le serveur pour éviter d’entraîner des coûts inutiles dans le terminal Bash. Exécutez la commande suivante pour arrêter le serveur :
 
     ```azurecli
@@ -318,8 +314,10 @@ Dans cette section, vous allez explorer certaines des fonctions intégrées disp
 
     > &#128221; Vous pouvez également arrêter le serveur depuis le portail Azure. Dans le portail Azure, accédez aux **groupes de ressources** et sélectionnez le groupe de ressources que vous avez créé précédemment. Sélectionnez le serveur PostgreSQL, puis sélectionnez **Arrêter** dans le menu.
 
+1. Fermez Visual Studio Code.
+
+## Nettoyage
+
+1. Si vous n’avez plus besoin de ce serveur PostgreSQL pour d’autres exercices, pour éviter d’entraîner des coûts Azure inutiles, supprimez le groupe de ressources créé dans cet exercice.
+
 1. Si nécessaire, supprimez le référentiel Git que vous avez cloné précédemment.
-
-Vous avez terminé cet exercice. Vous avez créé quelques procédures stockées et les avez exécutées. Vous avez également créé une fonction table et exploré certaines des fonctions intégrées disponibles dans PostgreSQL.
-
-Vous pouvez maintenant utiliser ces procédures stockées et ces fonctions dans vos propres bases de données PostgreSQL afin d’effectuer différentes opérations sur les données.
