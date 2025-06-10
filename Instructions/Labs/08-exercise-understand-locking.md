@@ -237,7 +237,7 @@ psql -h <servername> -p <port> -U <username> <dbname>
     Vous trouverez le nom du serveur dans **Vue d’ensemble** dans le portail Azure ou en tant que sortie du script Bicep.
 
     ```sql
-   psql -h <servername>.postgres.database.azure.com -p 5432 -U pgAdmin postgres
+   psql -h <servername>.postgres.database.azure.com -p 5432 -U pgAdmin adventureworks
     ```
 
     Le mot de passe de compte Administrateur que vous avez précédemment copié vous est alors demandé.
@@ -272,7 +272,7 @@ psql -h <servername> -p <port> -U <username> <dbname>
 1. Ensuite, utilisez la commande `COPY` pour charger des données à partir de fichiers CSV dans la table que vous avez créée précédemment. Commencez par exécuter la commande suivante pour remplir la table `production.workorder` :
 
     ```sql
-    \COPY production.workorder FROM 'mslearn-postgresql/Allfiles/Labs/08/Lab8_workorder.csv' CSV HEADER
+    \COPY production.workorder FROM 'Allfiles/Labs/08/Lab8_workorder.csv' CSV HEADER
     ```
 
     La sortie de commande doit être `COPY 72591`, indiquant que 72 591 lignes ont été écrites dans la table à partir du fichier CSV.
@@ -355,7 +355,7 @@ psql -h <servername> -p <port> -U <username> <dbname>
 
 1. Revenez à la *première* fenêtre de requête et exécutez à nouveau la requête dans cette fenêtre.
 
-1. Notez que la valeur **stockedqty** pour la première ligne est toujours **673**. La requête utilise un instantané des données et ne voit pas les mises à jour de l’autre transaction.
+1. Notez que la valeur de **scrappedqty** pour la première ligne est toujours **673**. La requête utilise un instantané des données et ne voit pas les mises à jour de l’autre transaction.
 
 1. Sélectionnez l’onglet de la *deuxième* requête, supprimez la requête existante, saisissez la requête suivante, puis sélectionnez **Exécuter**.
 
