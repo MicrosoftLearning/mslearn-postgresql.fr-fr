@@ -195,7 +195,7 @@ Dans cette tâche, vous allez vous connecter à la base de données `rentals` su
 
 1. Dans le [portail Azure](https://portal.azure.com/), accédez à votre serveur flexible Azure Database pour PostgreSQL nouvellement créé.
 
-2. Dans le menu de ressource, dans **Paramètres**, sélectionnez **Bases de données**, puis **Connecter** pour la base de données `rentals`.
+2. Dans le menu de ressource, dans **Paramètres**, sélectionnez **Bases de données**, puis **Connecter** pour la base de données `rentals`. Notez que la sélection de **Se connecter** ne vous connecte pas réellement à la base de données ; elle fournit simplement des instructions pour se connecter à la base de données en utilisant différentes méthodes. Consultez les instructions pour **Se connecter depuis le navigateur ou localement** et utilisez-les pour vous connecter en utilisant Azure Cloud Shell.
 
     ![Capture d’écran de la page Bases de données d’Azure SQL Database pour PostgreSQL. Le paramètre Bases de données et l’élément Connecter de la base de données de location sont encadrés en rouge.](media/17-postgresql-rentals-database-connect.png)
 

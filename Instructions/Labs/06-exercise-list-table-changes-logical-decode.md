@@ -125,7 +125,7 @@ Dans cette section, vous allez créer le serveur de publication. Le serveur de p
 1. Sous l’onglet **Général** du serveur flexible, renseignez chaque champ comme suit :
     - **Abonnement** : votre abonnement.
     - **Groupe de ressources** - Sélectionnez **rg-PostgreSQL_Replication**.
-    - **Nom du serveur** - *psql-postgresql-pub9999* (le nom doit être globalement unique, remplacez donc 9999 par quatre chiffres aléatoires).
+    - **Nom du serveur** - *psql-postgresql-sub9999* (le nom doit être unique au niveau mondial, remplacez donc 9999 par quatre chiffres aléatoires).
     - **Région** - sélectionnez la même région que le groupe de ressources.
     - **Version de PostgreSQL** - Sélectionnez 16.
     - **Type de charge de travail** - *Développement*.

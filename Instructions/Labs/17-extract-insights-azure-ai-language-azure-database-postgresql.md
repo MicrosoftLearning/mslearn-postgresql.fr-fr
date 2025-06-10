@@ -132,7 +132,7 @@ Dans cette tâche, vous allez vous connecter à la base de données `rentals` su
 
 1. Dans le [portail Azure](https://portal.azure.com/), accédez à votre serveur flexible Azure Database pour PostgreSQL nouvellement créé.
 
-2. Dans le menu de ressource, dans **Paramètres**, sélectionnez **Bases de données**, puis **Connecter** pour la base de données `rentals`.
+2. Dans le menu de ressource, dans **Paramètres**, sélectionnez **Bases de données**, puis **Connecter** pour la base de données `rentals`. Notez que la sélection de **Se connecter** ne vous connecte pas réellement à la base de données ; elle fournit simplement des instructions pour se connecter à la base de données en utilisant différentes méthodes. Consultez les instructions pour **Se connecter depuis le navigateur ou localement** et utilisez-les pour vous connecter en utilisant Azure Cloud Shell.
 
     ![Capture d’écran de la page Bases de données d’Azure SQL Database pour PostgreSQL. Le paramètre Bases de données et l’élément Connecter de la base de données de location sont encadrés en rouge.](media/17-postgresql-rentals-database-connect.png)
 
@@ -299,7 +299,7 @@ Pour réinitialiser vos exemples de données, vous pouvez exécuter `DROP TABLE 
     ```sql
     SELECT id, name
     FROM listings, unnest(listings.entities) AS e
-    WHERE e.text LIKE '%roof%deck%'
+    WHERE e.text LIKE '%basements%'
     LIMIT 10;
     ```
 
@@ -381,7 +381,7 @@ Pour réinitialiser vos exemples de données, vous pouvez exécuter `DROP TABLE 
 4. Vous pouvez également identifier les entités reconnues dans les PII. Par exemple, en utilisant la même liste indiquée ci-dessus :
 
     ```sql
-    SELECT entities
+    SELECT pii_entities
     FROM listings
     WHERE entities IS NOT NULL
     LIMIT 1;
@@ -419,7 +419,7 @@ Nous allons vérifier que les phrases clés extraites, les entités reconnues et
     SELECT COUNT(*) FROM listings WHERE entities IS NOT NULL;
     ```
 
-    Un résultat semblable à celui-ci doit s’afficher :
+    Vous devriez obtenir quelque chose comme :
 
     ```sql
     count 
@@ -447,7 +447,7 @@ Nous allons vérifier que les phrases clés extraites, les entités reconnues et
     SELECT COUNT(*) FROM listings WHERE description != description_pii_safe;
     ```
 
-    Un résultat semblable à celui-ci doit s’afficher :
+    Vous devriez obtenir quelque chose comme :
 
     ```sql
     count 
