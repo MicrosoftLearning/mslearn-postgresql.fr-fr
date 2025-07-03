@@ -236,7 +236,7 @@ Dans cette section, vous vous connectez au serveur PostgreSQL à l’aide de l�
 
     1. Sélectionnez les points de suspension dans la barre de menus avec l’icône d’*exécution* et sélectionnez **Modifier la base de données PostgreSQL**. Sélectionnez `zoodb` dans la liste des bases de données.
 
-    > &#128221; Vous pouvez également modifier la base de données dans le volet de requête. Vous pouvez noter le nom du serveur et le nom de la base de données sous l’onglet requête lui-même. Sélectionner le nom de la base de données affiche une liste des bases de données. Sélectionnez la base de données `zoodb` dans la liste.
+        > &#128221; Vous pouvez également modifier la base de données dans le volet de requête. Vous pouvez noter le nom du serveur et le nom de la base de données sous l’onglet requête lui-même. Sélectionner le nom de la base de données affiche une liste des bases de données. Sélectionnez la base de données `zoodb` dans la liste.
 
     1. Réexécutez l’instruction **SELECT current_database()** pour confirmer que la base de données est maintenant définie sur `zoodb`.
 
@@ -418,4 +418,18 @@ Ces tests montrent que le nouvel utilisateur ou la nouvelle utilisatrice peut ex
 
 1. Si vous n’avez plus besoin de ce serveur PostgreSQL pour d’autres exercices, pour éviter d’entraîner des coûts Azure inutiles, supprimez le groupe de ressources créé dans cet exercice.
 
+1. Si vous souhaitez conserver le serveur PostgreSQL en cours d’exécution, vous pouvez le laisser en cours d’exécution. Sinon, vous pouvez arrêter le serveur pour éviter d’entraîner des coûts inutiles dans le terminal Bash. Exécutez la commande suivante pour arrêter le serveur :
+
+    ```azurecli
+    az postgres flexible-server stop --name <your-server-name> --resource-group $RG_NAME
+    ```
+
+    Remplacez `<your-server-name>` par le nom de votre serveur PostreSQL.
+
+    > &#128221; Vous pouvez également arrêter le serveur depuis le portail Azure. Dans le portail Azure, accédez aux **groupes de ressources** et sélectionnez le groupe de ressources que vous avez créé précédemment. Sélectionnez le serveur PostgreSQL, puis sélectionnez **Arrêter** dans le menu.
+
 1. Si nécessaire, supprimez le référentiel Git que vous avez cloné précédemment.
+
+Vous avez terminé cet exercice. Vous avez appris à attribuer des rôles RBAC afin de contrôler l’accès aux ressources Azure Database pour PostgreSQL et PostgreSQL GRANTS pour contrôler l’accès aux opérations de base de données.
+
+Vous avez également appris à créer un compte d’utilisateur dans Microsoft Entra ID et à lui attribuer les rôles Lecteur et Contributeur. Enfin, vous avez créé un rôle dans PostgreSQL et lui avez attribué des autorisations pour accéder à la base de données.
