@@ -125,7 +125,7 @@ Dans cette tâche, vous allez vous connecter à la base de données `rentals` su
 
     Une fois connecté, l’invite `psql` de la base de données `rentals` s’affiche.
 
-## Remplissez la base de données avec des exemples de données
+## Remplir la base de données avec des exemples de données
 
 Avant de pouvoir analyser le sentiment des avis sur la location à l’aide de l’extension `azure_ai`, vous devez ajouter des exemples de données à votre base de données. Ajoutez une table à la base de données `rentals` et remplissez-la avec les avis des clients afin de disposer de données sur lesquelles effectuer l’analyse des sentiments.
 
