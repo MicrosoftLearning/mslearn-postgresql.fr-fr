@@ -129,7 +129,7 @@ Dans cette tâche, vous allez vous connecter à la base de données `rentals` su
 
     ![Capture d’écran du volet Azure Cloud Shell avec le bouton Agrandir encadré en rouge.](media/12-azure-cloud-shell-pane-maximize.png)
 
-## Remplissez la base de données avec des exemples de données
+## Remplir la base de données avec des exemples de données
 
 Avant d’explorer l’extension `azure_ai`, ajoutez quelques tables à la base de données `rentals` et remplissez-les avec des exemples de données afin d’avoir des informations à utiliser lorsque vous passez en revue les fonctionnalités de l’extension.
 

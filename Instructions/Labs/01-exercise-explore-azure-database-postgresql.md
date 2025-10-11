@@ -12,7 +12,7 @@ Dans cet exercice, vous allez créer un serveur flexible Azure Database pour Pos
 
 Pour effectuer cet exercice, vous avez besoin de votre propre abonnement Azure. Si vous n’avez pas d’abonnement Azure, vous pouvez demander un [essai gratuit d’Azure](https://azure.microsoft.com/free).
 
-### Création d’un groupe de ressources
+### Créer un groupe de ressources
 
 1. Dans un navigateur web, accédez au [portail Azure](https://portal.azure.com). Connectez-vous à l’aide d’un compte propriétaire ou contributeur.
 2. Sous Services Azure, sélectionnez **Groupes de ressources**, puis **+ Créer**.
@@ -27,7 +27,7 @@ Pour effectuer cet exercice, vous avez besoin de votre propre abonnement Azure. 
     1. Abonnement : votre abonnement.
     1. Groupe de ressources : **rg-PostgreSQL_Flexi**.
     1. Nom du serveur : **psql-postgresql-fx9999** (le nom du serveur doit être globalement unique, remplacez donc 9999 par quatre chiffres aléatoires).
-    1. Région - sélectionnez la même région que le groupe de ressources.
+    1. Région : sélectionnez la même région que le groupe de ressources.
     1. Version de PostgreSQL : sélectionnez 16.
     1. Type de charge de travail - **Développement**.
     1. Calcul + stockage - **Burstable, B1ms**. Sélectionnez **Configurer le serveur** et examinez les options de configuration. N’apportez aucune modification et fermez le volet dans le coin supérieur droit.
@@ -64,7 +64,7 @@ Pour effectuer cet exercice, vous avez besoin de votre propre abonnement Azure. 
     1. Abonnement : votre abonnement.
     1. Groupe de ressources : **rg-PostgreSQL_Flexi**.
     1. Nom du serveur : **psql-postgresql-fx8888** (le nom du serveur doit être globalement unique, remplacez donc 8888 par quatre chiffres aléatoires).
-    1. Région - sélectionnez la même région que le groupe de ressources.
+    1. Région : sélectionnez la même région que le groupe de ressources.
     1. Version de PostgreSQL : sélectionnez 16.
     1. Type de charge de travail - **Production (petite/moyenne)**
     1. Calcul + stockage : laissez sur **Usage général**.

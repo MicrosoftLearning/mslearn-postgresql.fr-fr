@@ -151,7 +151,7 @@ Pour stocker et interroger des vecteurs et générer des incorporations, vous de
     SELECT azure_ai.set_setting('azure_openai.subscription_key', '<API Key>');
     ```
 
-## Remplissez la base de données avec des exemples de données
+## Remplir la base de données avec des exemples de données
 
 Avant d’explorer l’extension `azure_ai`, ajoutez quelques tables à la base de données `rentals` et remplissez-les avec des exemples de données afin d’avoir des informations à utiliser lorsque vous passez en revue les fonctionnalités de l’extension.
 
@@ -321,7 +321,7 @@ Dans ce benchmark, nous avons obtenu l’incorporation de l’exemple d’annonc
     \df recommend_listing
     ```
 
-    Les éléments suivants doivent s’afficher :
+    Les éléments suivants doivent s’afficher :
 
     ```sql
     public | recommend_listing | TABLE(out_listingname text, out_listingdescription text, out_score real) | samplelistingid integer, numre
